@@ -17,10 +17,12 @@ export default {
   },
   commandCenter: {
     userDetails:{},
+    authorization:{},
     userRole: '',
     currentBuildDetails: [],
     userBuildDetails:[],
     triggeredBuilds:[],
-    buildBlob:{}
+    buildBlob:{},
+    health:{}
   }
 };

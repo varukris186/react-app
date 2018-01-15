@@ -1,82 +1,144 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/userActions';
+import * as CONSTANTS from '../constants/actionTypes';
+import fireInteractiveComponent from '../hoc/firebase';
 
-class LoginRegisterPage extends React.Component{
+class LoginRegisterPage extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
-    
-        this.save = this.save.bind(this);
-       
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      email: "",
+      password: "",
+      lemail: "",
+      lpassword: ""
+    };
+    this.save = this.save.bind(this);
+    this.login = this.login.bind(this);
+    this.updateInputValue = this.updateInputValue.bind(this);
+  }
+
+
+  componentDidMount() {
+    $(".email-signup").hide();
+    $("#signup-box-link").click(function () {
+      $(".email-login").fadeOut(100);
+      $(".email-signup").delay(100).fadeIn(100);
+      $("#login-box-link").removeClass("active");
+      $("#signup-box-link").addClass("active");
+    });
+    $("#login-box-link").click(function () {
+      $(".email-login").delay(100).fadeIn(100);;
+      $(".email-signup").fadeOut(100);
+      $("#login-box-link").addClass("active");
+      $("#signup-box-link").removeClass("active");
+    });
+  }
+
+
+  updateInputValue(evt) {
+    switch (evt.target.name) {
+      case 'email':
+        this.setState({ email: evt.target.value });
+        break;
+      case 'password':
+        this.setState({ password: evt.target.value });
+        break;
+      case 'lemail':
+        this.setState({ lemail: evt.target.value });
+        break;
+      case 'lpassword':
+        this.setState({ lpassword: evt.target.value });
+        break;
+      default:
     }
+  }
 
-    save() {
-        console.log(this);
 
-         this.props.actions.register();
-    }   
 
-  render(){  
-  return (
-    <div>
+  save() {
+    let result = this.props.firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password);
+    result.then(() => {
+      this.props.actions.register(CONSTANTS.REGISTER_SUCCESS);
+    }, () => {
+      this.props.actions.register(CONSTANTS.REGISTER_FAILURE);
+    });
+  }
+
+
+  login() {
+    let result = this.props.firebase.auth().signInWithEmailAndPassword(this.state.lemail, this.state.lpassword).catch((error) => {
+      
+      this.props.actions.handleLogin(CONSTANTS.LOGIN_FAILURE,error);
+    });
+    result.then((loginData) =>{
+      if(loginData !== undefined){
+        this.props.actions.handleLogin(CONSTANTS.LOGIN_SUCCESS,loginData);
+      }
+    });
+  }
+
+  render() {
+    return (
+      <div>
         <div className="login-box">
-    <div className="lb-header">
-      <a href="#" className="active" id="login-box-link">Login</a>
-      <a href="#" id="signup-box-link">Sign Up</a>
-    </div>
-    <div className="social-login">
-      <a href="#">
-        <i className="fa fa-facebook fa-lg"></i>
-        Login in with facebook
+          <div className="lb-header">
+            <a href="#" className="active" id="login-box-link">Login</a>
+            <a href="#" id="signup-box-link">Sign Up</a>
+          </div>
+          <div className="social-login">
+            <a href="#">
+              <i className="fa fa-facebook fa-lg"></i>
+              Login in with facebook
       </a>
-      <a href="#">
-        <i className="fa fa-google-plus fa-lg"></i>
-        log in with Google
+            <a href="#">
+              <i className="fa fa-google-plus fa-lg"></i>
+              log in with Google
       </a>
-    </div>
-    <section className="email-login"  onClick={this.save}>
-      <div className="u-form-group">
-        <input type="email" placeholder="Email"/>
+          </div>
+          <section className="email-login" >
+            <div className="u-form-group">
+              <input type="email" name="lemail" placeholder="Email" value={this.state.lemail} onChange={this.updateInputValue}/>
+            </div>
+            <div className="u-form-group">
+              <input type="password" name="lpassword" value={this.state.lpassword} onChange={this.updateInputValue} placeholder="Password" />
+            </div>
+            <div className="u-form-group">
+              <button onClick={this.login}> Log in</button>
+            </div>
+            <div className="u-form-group">
+              <a href="#" className="forgot-password">Forgot password?</a>
+            </div>
+          </section>
+          <form className="email-signup" action="javascript:void();" >
+            <div className="u-form-group">
+              <input type="email" placeholder="Email" name="email" value={this.state.email} onChange={this.updateInputValue} />
+            </div>
+            <div className="u-form-group">
+              <input type="password" placeholder="Password" name="password" />
+            </div>
+            <div className="u-form-group">
+              <input type="password" placeholder="Confirm Password" name="password" onChange={this.updateInputValue} value={this.state.password} />
+            </div>
+            <div className="u-form-group">
+              <button onClick={this.save}>Sign Up</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div className="u-form-group">
-        <input type="password" placeholder="Password"/>
-      </div>
-      <div className="u-form-group">
-        <button>Log in</button>
-      </div>
-      <div className="u-form-group">
-        <a href="#" className="forgot-password">Forgot password?</a>
-      </div>
-    </section>
-    <form className="email-signup">
-      <div className="u-form-group">
-        <input type="email" placeholder="Email"/>
-      </div>
-      <div className="u-form-group">
-        <input type="password" placeholder="Password"/>
-      </div>
-      <div className="u-form-group">
-        <input type="password" placeholder="Confirm Password"/>
-      </div>
-      <div className="u-form-group">
-        <button>Sign Up</button>
-      </div>
-    </form>
-  </div>
-    </div>    
 
-    
-  );
 
-} 
+    );
+
+  }
 
 }
 
-LoginRegisterPage.save = function(){
-    alert("123");
+LoginRegisterPage.save = function () {
+  alert("123");
 };
 
 LoginRegisterPage.propTypes = {
@@ -86,7 +148,7 @@ LoginRegisterPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    userdetails : state
+    userdetails: state
   };
 }
 
@@ -96,9 +158,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
+export default fireInteractiveComponent(connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginRegisterPage);
+)(LoginRegisterPage));
 
 

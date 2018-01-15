@@ -15,12 +15,6 @@ import Dashboard from '../containers/Dashboard';
 
 class App extends React.Component {
   
-
-  componentDidMount () {
-   
-  }
-
-
   render() {
     return (
       <div>
@@ -29,6 +23,7 @@ class App extends React.Component {
           <Route exact path="/dashboard" component={Dashboard} />
           <Route path="/fuel-savings" component={FuelSavingsPage} />
           <Route path="/about" component={AboutPage} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>
