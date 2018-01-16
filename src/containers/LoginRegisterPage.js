@@ -83,21 +83,27 @@ class LoginRegisterPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="loginContainer">
         <div className="login-box">
           <div className="lb-header">
             <a href="#" className="active" id="login-box-link">Login</a>
             <a href="#" id="signup-box-link">Sign Up</a>
           </div>
           <div className="social-login">
-            <a href="#">
-              <i className="fa fa-facebook fa-lg"></i>
-              Login in with facebook
-      </a>
-            <a href="#">
-              <i className="fa fa-google-plus fa-lg"></i>
-              log in with Google
-      </a>
+            <div className="col-xs-12 login-option-container">
+                <div className="col-xs-6 login-option fb-login">
+                    <a href="#">
+                      <i className="fa fa-facebook fa-lg"></i>
+                      Login in with facebook
+                    </a>
+                </div>
+                <div className="col-xs-6 login-option google-login">
+                    <a href="#">
+                      <i className="fa fa-google-plus fa-lg"></i>
+                      log in with Google
+                    </a>
+                </div>
+            </div>
           </div>
           <section className="email-login" >
             <div className="u-form-group">

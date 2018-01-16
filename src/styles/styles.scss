@@ -1,3 +1,41 @@
+body{
+    background: radial-gradient(circle at 37% 60%, #efefef, #fff) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin-left:0;
+    margin-right:0;
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    //line-height: 1.4em;
+    color: #4d4d4d;
+    margin: 0 auto !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    font-weight: 300;
+}
+
+.paddingZero {
+    padding: 0px !important;
+}
+.marginZero {
+    margin: 0px !important;
+}
+
+.footerBrand{
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-family: cursive;
+    font-size: 20px;
+    margin: 3px;
+    text-shadow: 0px 0px 2px #fff;
+}
+.footerContainer{
+    margin-top: -5%;
+    font-variant: petite-caps;
+    font-weight: 600;
+}
 @font-face {
   font-family: 'Roboto';
   src: url('../font/Roboto-Regular-webfont.eot');
@@ -25,18 +63,6 @@ $vin-green: #60b044;
 $vin-red: #ff0000;
 
 /* Styles */
-body {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.4em;
-  color: #4d4d4d;
-  
-  margin: 0 auto !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  font-weight: 300;
-}
-
 td {
 	padding: 12px;
 }
@@ -50,11 +76,9 @@ h2 {
 input.small { width: 46px; }
 td.fuel-savings-label { width: 175px; }
 
-
-body{
-  background-color: #1cbb9b;
-  margin-left:0;
-  margin-right:0;
+.loginContainer{
+    margin-top: 8%;
+    margin-bottom: 2em;
 }
 .login-box{
   position:relative;
@@ -64,9 +88,9 @@ body{
   background-color: #fff;
   padding: 10px;
   border-radius: 3px;
-  -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
--moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.33);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.33);
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.33);
 }
 .lb-header{
   position:relative;
@@ -101,18 +125,24 @@ box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
   border-bottom: 1px solid #eee;
 }
 .social-login a{
-  position:relative;
-  float: left;
-  width:calc(40% - 8px);
+  //position:relative;
+  //float: left;
+  //width:calc(40% - 8px);
   text-decoration: none;
   color: #fff;
-  border: 1px solid rgba(0,0,0,0.05);
-  padding: 12px;
+  //border: 1px solid rgba(0,0,0,0.05);
+  //padding: 12px;
   border-radius: 2px;
   font-size: 12px;
   text-transform: uppercase;
   margin: 0 3%;
   text-align:center;
+}
+.login-option-container {
+    padding: 10px;
+}
+.login-option {
+    padding: 10px;
 }
 .social-login a i{
   position: relative;
@@ -120,10 +150,10 @@ box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
   width: 20px;
   top: 2px;
 }
-.social-login a:first-child{
+.fb-login{
   background-color: #49639F;
 }
-.social-login a:last-child{
+.google-login{
   background-color: #DF4A32;
 }
 .email-login,.email-signup{
@@ -140,14 +170,14 @@ box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
 }
 .u-form-group input[type="email"],
 .u-form-group input[type="password"]{
-  width: calc(50% - 22px);
+  width: calc(80%);
   height:45px;
   outline: none;
   border: 1px solid #ddd;
   padding: 0 10px;
   border-radius: 2px;
   color: #333;
-  font-size:0.8rem;
+  //font-size:0.8rem;
   -webkit-transition:all 0.1s linear;
   -moz-transition:all 0.1s linear;
   transition:all 0.1s linear;
@@ -172,7 +202,7 @@ box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.33);
   text-align: left;
   text-decoration: underline;
   color: #888;
-  font-size: 0.75rem;
+  //font-size: 0.75rem;
 }
 
 .margin-resetter{
