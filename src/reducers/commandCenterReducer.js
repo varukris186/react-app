@@ -9,14 +9,14 @@ import * as CONSTANTS from '../constants/actionTypes';
 // Note that I'm using Object.assign to create a copy of current state
 // and update values on the copy.
 export default function commandCenterReducer(state = initialState.commandCenter, action) {
+  console.log(action)
   switch (action.type) {
     case CONSTANTS.BUILD_DATA:
-    let state_ful = objectAssign({}, state, {buildBlob: action.data.data.builds,health:action.data.data.healthReport[0]});
+    let state_ful = objectAssign({}, state, {buildBlob: action.data.data.builds,data:action.data,health:action.data.data.healthReport[0]});
     return state_ful;
 
     case CONSTANTS.CURRENT_BUILD_DATA:
     let current_state = objectAssign({}, state, {currentBuildDetails: action.data.data});
-    debugger;
     return current_state;
 
     default:

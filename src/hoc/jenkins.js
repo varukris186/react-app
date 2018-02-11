@@ -7,7 +7,6 @@ const jenkinsInteractiveComponent = (WrappedComponent) => {
   return class componentName extends Component {
     constructor(props) {
       super(props);
-
     }
 
     getAllBuilds() {
@@ -15,7 +14,7 @@ const jenkinsInteractiveComponent = (WrappedComponent) => {
         baseURL: 'http://localhost:8080/job/build/',
         timeout: 2000,
       });
-      return instance.get('/api/json');
+      return instance.get('/api/json?tree=healthReport[description,score],builds[number,description,timestamp,id,result]');
     }
 
     getBuildInformation(number) {
@@ -44,9 +43,12 @@ const jenkinsInteractiveComponent = (WrappedComponent) => {
           title: "Build To be Raised",
           icon: ""
         },
+        data:{
+
+        },
         content_available: true,
         priority: "high",
-        to: "ccpzmoewtAo:APA91bEjE7JjCnRsp8Dh32uyTj3CQ4HirtHUYh9rfXLLRHknDAUM_FlydOgusLLk6w8qLh1-rTfveUTyBQX_uV-nx5AtD36EWqLH8KW2I7DZ70qHgxibhoUAw-um7RfAsshXB7FLIVwv"
+        to: "fV18BNDEaV0:APA91bGAku6qZU4CmufDBjUhBjmBeWAeg7DByeiOvs8fkolqtitE8NvycGCzKhKN9d5QWo6PotMjn9XXWjjetG0oK8SYiGnOaPVhoHEa7VOAuNrBYIyAqmAQfQSZm3M22Wym3cicjeNh"
       })
         .then(function (response) {
           console.log(response);

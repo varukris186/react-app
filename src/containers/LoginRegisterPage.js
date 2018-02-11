@@ -97,7 +97,7 @@ class LoginRegisterPage extends React.Component {
                       Login in with facebook
                     </a>
                 </div>
-                <div className="col-xs-6 login-option google-login">
+                <div className="col-xs-5 login-option google-login">
                     <a href="#">
                       <i className="fa fa-google-plus fa-lg"></i>
                       log in with Google

@@ -34,6 +34,7 @@ class Dashboard extends Component {
   render() {
     return (
       <section className="row">
+        <section className="heading"><h1><strong> Build Information Dashboard </strong></h1> </section> 
         <div className="col-lg-4 dashboard">
           <Listview getBuildInformation={this.props.getBuildInformation}/>
         </div>

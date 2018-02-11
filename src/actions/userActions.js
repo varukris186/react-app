@@ -16,11 +16,10 @@ export const register = (type) => (dispatch) => {
 
 // example of a thunk using the redux-thunk middleware
 export const handleLogin = (type,data) => (dispatch) => {
-  console.log(type);
   switch(type){
     case CONSTANTS.LOGIN_SUCCESS:
        alert("lOGIN SUCESS");
-       dispatch(push('/dashboard'));
+       dispatch(push('/build-projects'));
        break;
     case CONSTANTS.LOGIN_FAILURE:
        alert("LOGIN FAILURE");
@@ -42,6 +41,11 @@ export const updateCurrentBuild = (type,data) => (dispatch) => {
     type: CONSTANTS.CURRENT_BUILD_DATA,
     data: data
   });
+};
+
+
+export const navigateToDashboard = (type,data) => (dispatch) => {
+    dispatch(push('/dashboard'));
 };
 
 

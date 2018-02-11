@@ -8,30 +8,53 @@ import { ListGroup, ListGroupItem,ProgressBar } from 'react-bootstrap';
 class ListView extends Component {
 
 
-    static renderTransaction(value, index) {
-        if (index <= 5) {
+    static returnType(value){
+        console.log(value)
+
+        if(value === "SUCCESS"){
             return (
-                <ListGroupItem onClick={() => ListView.changeCurrentBuild(index)}><a href="javascript:void()">Build #{index}</a></ListGroupItem>
+                <span className="green aligner">
+                 SUCCESS
+                </span>
+            );
+        }
+        else{
+            return (
+                <span className="red aligner">
+                 FAILURE
+                </span>
+            );
+        }
+
+    }
+
+    static renderTransaction(value, index) {
+        if (index <= 8) {
+            return (
+                <ListGroupItem onClick={() => ListView.changeCurrentBuild(index,this)}>
+                    <a href="javascript:void()" className="build-heading">Build #{index}  </a>
+                    {ListView.returnType(value.result)}
+                </ListGroupItem>
             )
         }
     }
 
-    static changeCurrentBuild(number){
-        this.props.getBuildInformation(number).then((data) => {
+    static changeCurrentBuild(number,self){
+        self.props.getBuildInformation(number).then((data) => {
             console.log(data);
             this.props.actions.updateCurrentBuild(undefined, data);
           }, (error) => {
             console.log(error)
-          });
+        });
     }
 
     constructor(props, context) {
         super(props, context);
+        ListView.renderTransaction = ListView.renderTransaction.bind(this);
         ListView.changeCurrentBuild = ListView.changeCurrentBuild.bind(this);
     }
 
     render() {
-        debugger;
         return (
             <section className="row columns col-lg-12">
                 <section className="col-lg-12">
@@ -46,13 +69,13 @@ class ListView extends Component {
 
                     <section className="page-header col-lg-12">Health Report</section>
                     <div className="col-lg-12 ">
-                        <section className="example">
-                             {this.props.userdetails.commandCenter.health.description}
-                        </section>   
+                       
+                    <section className="">
+                    <ProgressBar className="green" now={90} />
+                </section>  
 
-                        <section className="">
-                            <ProgressBar className="green" now={this.props.userdetails.commandCenter.health.score} />
-                        </section>    
+                        <section className="margin-resetter col-lg-12 card-data"><strong>Build Stability:</strong> {this.props.userdetails.commandCenter.health.description}</section>
+  
                     </div>
 
 
